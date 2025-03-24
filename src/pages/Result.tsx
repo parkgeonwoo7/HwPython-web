@@ -41,9 +41,10 @@ export function Result() {
         }
 
         const response = await axios.post(
-          "/api/scanner/v1/get-ocr",
+          "https://aidt.qanda-ai.dev/scanner/v1/text",
           { 
-            image: `data:image/jpeg;base64,${imageData}` 
+            image: `data:image/jpeg;base64,${imageData}`,
+            expr_support: true
           },
           {
             headers: {
@@ -71,7 +72,7 @@ export function Result() {
             const text = Array.isArray(response.data.texts) ? response.data.texts.join('\n') : '텍스트 추출 실패';
             const modifiedText = text.replace(/\\\(/g, '@').replace(/\\\)/g, '@');
             setOcrText(modifiedText);
-            const formulaMatches = modifiedText.match(/@[^@]*@/g) || [];
+            const formulaMatches = text.match(/\\\([^\\]*\\\)/g) || [];
             setFormulaCount(formulaMatches.length);
           } else {
             setOcrText('텍스트 추출 실패');
