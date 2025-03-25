@@ -51,13 +51,13 @@ export function Upload() {
   });
 
   return (
-    <div className="w-full h-[calc(100vh-3.5rem)] flex flex-col justify-center px-4">
+    <div className="w-full min-h-[calc(100vh-3.5rem)] flex flex-col justify-center px-3 sm:px-4 py-6 sm:py-8">
       <div className="max-w-2xl mx-auto w-full">
-        <div className="text-center space-y-4 mb-12">
-          <h1 className="text-4xl font-bold text-gray-900">
+        <div className="text-center space-y-3 sm:space-y-4 mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-900">
             수학 문제 이미지 변환
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-base sm:text-xl text-gray-600">
             이미지를 업로드하여 수학 문제를 텍스트로 변환하세요
           </p>
         </div>
@@ -66,32 +66,32 @@ export function Upload() {
           {...getRootProps()}
           className={`
             relative overflow-hidden
-            border-2 border-dashed rounded-2xl p-12
+            border-2 border-dashed rounded-xl sm:rounded-2xl p-6 sm:p-12
             flex flex-col items-center justify-center
             transition-all duration-300 cursor-pointer
-            group
+            group min-h-[200px] sm:min-h-[240px]
             ${isDragActive 
               ? 'border-blue-500 bg-blue-50' 
               : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'}
           `}
         >
           <input {...getInputProps()} />
-          <div className="mb-6 transform transition-transform duration-300 group-hover:scale-110">
+          <div className="mb-4 sm:mb-6 transform transition-transform duration-300 group-hover:scale-110">
             {isDragActive ? (
-              <div className="p-4 bg-blue-100 rounded-full">
-                <UploadIcon className="w-12 h-12 text-blue-500" />
+              <div className="p-3 sm:p-4 bg-blue-100 rounded-full">
+                <UploadIcon className="w-8 sm:w-12 h-8 sm:h-12 text-blue-500" />
               </div>
             ) : (
-              <div className="p-4 bg-gray-100 rounded-full">
-                <ImageIcon className="w-12 h-12 text-gray-400" />
+              <div className="p-3 sm:p-4 bg-gray-100 rounded-full">
+                <ImageIcon className="w-8 sm:w-12 h-8 sm:h-12 text-gray-400" />
               </div>
             )}
           </div>
-          <div className="text-center space-y-2">
-            <p className="text-lg font-medium text-gray-900">
+          <div className="text-center space-y-1 sm:space-y-2">
+            <p className="text-base sm:text-lg font-medium text-gray-900">
               {isDragActive ? '여기에 파일을 놓으세요' : '이미지 업로드'}
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-xs sm:text-sm text-gray-600">
               {isDragActive
                 ? '파일을 놓으면 자동으로 업로드됩니다'
                 : '클릭하여 파일을 선택하거나 드래그하여 업로드하세요'}
@@ -103,24 +103,24 @@ export function Upload() {
           </div>
         </div>
 
-        <div className="mt-12 space-y-6">
+        <div className="mt-8 sm:mt-12 space-y-4 sm:space-y-6">
           <div className="flex items-center gap-2">
-            <FileCheck className="w-5 h-5 text-blue-500" />
-            <h2 className="text-lg font-semibold text-gray-900">
+            <FileCheck className="w-4 sm:w-5 h-4 sm:h-5 text-blue-500" />
+            <h2 className="text-base sm:text-lg font-semibold text-gray-900">
               지원되는 파일 형식
             </h2>
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {[
               { 
-                icon: <FileImage className="w-5 h-5 text-blue-500" />,
+                icon: <FileImage className="w-4 sm:w-5 h-4 sm:h-5 text-blue-500" />,
                 format: 'JPG/JPEG',
                 desc: '고품질 이미지 지원',
                 size: '최대 10MB'
               },
               {
-                icon: <FileImage className="w-5 h-5 text-green-500" />,
+                icon: <FileImage className="w-4 sm:w-5 h-4 sm:h-5 text-green-500" />,
                 format: 'PNG',
                 desc: '투명 배경 지원',
                 size: '최대 10MB'
@@ -128,16 +128,16 @@ export function Upload() {
             ].map((item) => (
               <div
                 key={item.format}
-                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 
+                className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100 
                   hover:border-blue-200 hover:shadow-md transition-all duration-200
                   hover:bg-gradient-to-br hover:from-blue-50/50 hover:to-purple-50/50"
               >
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                   {item.icon}
-                  <h3 className="font-medium text-gray-900">{item.format}</h3>
+                  <h3 className="font-medium text-gray-900 text-sm sm:text-base">{item.format}</h3>
                 </div>
-                <p className="text-sm text-gray-500">{item.desc}</p>
-                <p className="text-xs text-gray-400 mt-1">{item.size}</p>
+                <p className="text-xs sm:text-sm text-gray-500">{item.desc}</p>
+                <p className="text-[10px] sm:text-xs text-gray-400 mt-1">{item.size}</p>
               </div>
             ))}
           </div>
