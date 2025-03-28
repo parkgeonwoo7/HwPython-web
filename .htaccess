@@ -1,0 +1,34 @@
+RewriteEngine On
+
+# XML 파일의 MIME 타입 설정
+AddType application/xml .xml
+AddType text/xml .xml
+
+# 기본 파일 제공 설정
+Options -MultiViews
+RewriteBase /
+
+# sitemap.xml 직접 처리
+<FilesMatch "^sitemap\.xml$">
+    ForceType application/xml
+    Header set Content-Type "application/xml; charset=UTF-8"
+    Header set X-Robots-Tag "noindex"
+</FilesMatch>
+
+# robots.txt 직접 처리
+<FilesMatch "^robots\.txt$">
+    ForceType text/plain
+    Header set Content-Type "text/plain; charset=UTF-8"
+    Header set X-Robots-Tag "noindex"
+</FilesMatch>
+
+# sitemap.xml과 robots.txt는 직접 접근 허용
+RewriteCond %{REQUEST_URI} !^/sitemap\.xml$
+RewriteCond %{REQUEST_URI} !^/robots\.txt$
+
+# 기존 파일이나 디렉토리가 있는 경우는 그대로 접근 허용
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 나머지 모든 요청을 index.html로 리다이렉트
+RewriteRule ^ index.html [L]
